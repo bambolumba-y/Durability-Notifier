@@ -3,6 +3,9 @@ package ru.bambolumba.durabilitynotifier.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.entity.Player;
+
+import java.util.List;
 
 import static ru.bambolumba.durabilitynotifier.Utils.ConfigManager.getMessageConfig;
 
@@ -32,6 +35,13 @@ public class MessageUtil {
         String finalMessage = message + messageToAdd;
         MiniMessage miniMessage = MiniMessage.miniMessage();
         return miniMessage.deserialize(finalMessage);
+    }
+
+    public static void sendUsage(Player player) {
+        List<String> messageList = getMessageConfig().getStringList("usage");
+        for (String message : messageList) {
+            player.sendMessage(build(message, true));
+        }
     }
 
 }
