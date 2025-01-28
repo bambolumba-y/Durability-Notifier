@@ -9,7 +9,7 @@ public class MessageType {
 
     public MessageType() {
         this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.message.enabled");
-        this.text = ConfigManager.getMessageConfig().getString("notifications.types.message.text");
+        this.text = ConfigManager.getConfig().getString("notifications.types.message.text");
     }
 
     public boolean isEnabled() {

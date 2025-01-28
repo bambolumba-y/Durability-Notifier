@@ -9,7 +9,7 @@ public class ActionBarType {
 
     public ActionBarType() {
         this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.action-bar.enabled");
-        this.text = ConfigManager.getMessageConfig().getString("notifications.types.action-bar.text");
+        this.text = ConfigManager.getConfig().getString("notifications.types.action-bar.text");
     }
 
     public boolean isEnabled() {
