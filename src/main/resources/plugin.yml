@@ -2,3 +2,12 @@ name: Project Durability
 version: '${project.version}'
 main: ru.bambolumba.durabilitynotifier.ProjectDurability
 api-version: '1.21'
+
+commands:
+  durability:
+    description: Main plugin command
+
+permissions:
+  durability.admin:
+    default: op
+    description: Allows to use admin subcommand
