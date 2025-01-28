@@ -4,7 +4,6 @@
 #1. {item} - the item for which the notification was triggered
 
 notifications:
-  enabled: true
   required-percentage: 10 #When X percent of the durability remains, a notification will be triggered.
   types:
     message: #will send notification in chat
