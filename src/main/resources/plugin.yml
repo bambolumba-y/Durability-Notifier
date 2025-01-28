@@ -1,0 +1,4 @@
+name: Project Durability
+version: '${project.version}'
+main: ru.bambolumba.durabilitynotifier.ProjectDurability
+api-version: '1.21'
