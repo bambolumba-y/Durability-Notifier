@@ -1,0 +1,11 @@
+error:
+  common:
+    not-allowed: "<color:#fe6f5e><bold>|</bold></color> You are not allowed to use this command."
+    #next message will appear if player player did not enter a numeric argument where it is needed. Like when you need specify durability value to set to item.
+    no-number: "<color:#fe6f5e><bold>|</bold></color> You have not entered the value to be set."
+  admin:
+    not-damageable-item: "<color:#fe6f5e><bold>|</bold></color> Item in your hand can`t be damaged so whe can set durability."
+
+admin:
+  reloaded: "<color:#00f05e><bold>|</bold></color> Configuration has been reloaded."
+  durability-changed: "<color:#00f05e><bold>|</bold></color> Successfully set durability to the new value."
