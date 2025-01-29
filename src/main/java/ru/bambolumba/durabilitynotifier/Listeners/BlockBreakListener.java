@@ -29,8 +29,9 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        if (!(itemStack.getItemMeta() instanceof Damageable damageable)) {
-            plugin.getLogger().info("This item is not damageable");
+        Damageable damageable = (Damageable) itemStack.getItemMeta();
+
+        if (!damageable.hasDamageValue()) {
             return;
         }
 
