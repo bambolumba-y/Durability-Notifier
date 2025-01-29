@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import ru.bambolumba.durabilitynotifier.ProjectDurability;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
