@@ -42,6 +42,11 @@ public class Admin {
         */
         if (args[1].equalsIgnoreCase("preview")) {
 
+            if (args.length == 2) {
+                MessageUtil.sendUsage(player);
+                return true;
+            }
+
             ActionBarType actionBarType = plugin.getActionBar();
             MessageType messageType = plugin.getMessage();
             SoundType soundType = plugin.getSoundType();
