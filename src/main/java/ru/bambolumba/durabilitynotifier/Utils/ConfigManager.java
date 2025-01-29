@@ -1,8 +1,5 @@
 package ru.bambolumba.durabilitynotifier.Utils;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
