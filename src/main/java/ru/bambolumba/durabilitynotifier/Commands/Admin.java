@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import ru.bambolumba.durabilitynotifier.ProjectDurability;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
@@ -26,8 +27,11 @@ public class Admin {
             if (args[1].equalsIgnoreCase("set")) {
 
                 ItemStack itemStack = player.getInventory().getItemInMainHand();
+                ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("Предмет: " + itemStack);
+                Damageable damageable = (Damageable) itemStack.getItemMeta();
+                ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("Предмет может быть поврежден: " + damageable.hasMaxDamage());
 
-                if (!(itemStack instanceof Damageable damageable)) {
+                if (!damageable.hasDamageValue()) {
                     player.sendMessage(MessageUtil.build("error.admin.not-damageable-item"));
                     return true;
                 }
