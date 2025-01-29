@@ -1,5 +1,7 @@
 package ru.bambolumba.durabilitynotifier.Commands;
 
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -23,11 +25,19 @@ public class Admin {
             return true;
         }
 
+        ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("Args length = " + args.length);
         if (args.length == 3) {
             if (args[1].equalsIgnoreCase("set")) {
 
                 ItemStack itemStack = player.getInventory().getItemInMainHand();
-                ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("Предмет: " + itemStack);
+
+                if (itemStack.getType() == Material.AIR) {
+                    ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("No item in hand");
+                    return true;
+                }
+
+                ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("Предмет: "
+                        + PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
                 Damageable damageable = (Damageable) itemStack.getItemMeta();
                 ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("Предмет может быть поврежден: " + damageable.hasMaxDamage());
 
