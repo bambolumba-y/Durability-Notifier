@@ -4,25 +4,25 @@ import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 
 public class ActionBarType {
 
-    private boolean enabled;
-    private String text;
+    private final boolean enabled;
+    private final String damageText;
+    private final String breakText;
 
     public ActionBarType() {
         this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.action-bar.enabled");
-        this.text = ConfigManager.getConfig().getString("notifications.types.action-bar.text");
+        this.damageText = ConfigManager.getConfig().getString("notifications.types.action-bar.damage-text");
+        this.breakText = ConfigManager.getConfig().getString("notifications.types.action-bar.break-text");
     }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public String getText() {
-        return text;
+    public String getDamageText() {
+        return damageText;
     }
 
-    public void update() {
-        this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.action-bar.enabled");
-        this.text = ConfigManager.getConfig().getString("notifications.types.action-bar.text");
+    public String getBreakText() {
+        return breakText;
     }
-
 }

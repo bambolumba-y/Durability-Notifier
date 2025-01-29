@@ -4,25 +4,25 @@ import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 
 public class MessageType {
 
-    private boolean enabled;
-    private String text;
+    private final boolean enabled;
+    private final String damageText;
+    private final String breakText;
 
     public MessageType() {
         this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.message.enabled");
-        this.text = ConfigManager.getConfig().getString("notifications.types.message.text");
+        this.damageText = ConfigManager.getConfig().getString("notifications.types.message.damage-text");
+        this.breakText = ConfigManager.getConfig().getString("notifications.types.message.break-text");
     }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public String getText() {
-        return text;
+    public String getDamageText() {
+        return damageText;
     }
 
-    public void update() {
-        this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.message.enabled");
-        this.text = ConfigManager.getConfig().getString("notifications.types.message.text");
+    public String getBreakText() {
+        return breakText;
     }
-
 }
