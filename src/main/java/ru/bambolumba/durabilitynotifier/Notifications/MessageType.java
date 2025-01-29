@@ -4,8 +4,8 @@ import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 
 public class MessageType {
 
-    private final boolean enabled;
-    private final String text;
+    private boolean enabled;
+    private String text;
 
     public MessageType() {
         this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.message.enabled");
@@ -18,6 +18,11 @@ public class MessageType {
 
     public String getText() {
         return text;
+    }
+
+    public void update() {
+        this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.message.enabled");
+        this.text = ConfigManager.getConfig().getString("notifications.types.message.text");
     }
 
 }

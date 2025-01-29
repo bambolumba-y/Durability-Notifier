@@ -4,8 +4,8 @@ import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 
 public class ActionBarType {
 
-    private final boolean enabled;
-    private final String text;
+    private boolean enabled;
+    private String text;
 
     public ActionBarType() {
         this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.action-bar.enabled");
@@ -18,6 +18,11 @@ public class ActionBarType {
 
     public String getText() {
         return text;
+    }
+
+    public void update() {
+        this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.action-bar.enabled");
+        this.text = ConfigManager.getConfig().getString("notifications.types.action-bar.text");
     }
 
 }
