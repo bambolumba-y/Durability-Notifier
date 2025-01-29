@@ -29,29 +29,7 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        Damageable damageable = (Damageable) itemStack.getItemMeta();
-
-        if (!damageable.hasDamageValue()) {
-            return;
-        }
-
-        int durability = DurabilityUtil.getDurability(itemStack, damageable);
-        MessageType messageType = plugin.getMessage();
-        ActionBarType actionBarType = plugin.getActionBar();
-
-        if (DurabilityUtil.isDurabilityLow(durability)) {
-
-            String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
-
-            if (messageType.isEnabled()) {
-                player.sendMessage(MessageUtil.build(messageType.getText(), "\\{item\\}", itemName));
-            }
-
-            if (actionBarType.isEnabled()) {
-                player.sendActionBar(MessageUtil.build(actionBarType.getText(), "\\{item\\}", itemName));
-            }
-
-        }
+        DurabilityUtil.sendNotification(player, itemStack);
 
     }
 
