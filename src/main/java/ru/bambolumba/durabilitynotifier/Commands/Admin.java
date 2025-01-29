@@ -62,6 +62,10 @@ public class Admin {
                 return true;
             }
 
+        }
+
+        if (args.length == 2) {
+
             //./durability admin preview
             //Send the preview of notifications
             if (args[1].equalsIgnoreCase("preview")) {
