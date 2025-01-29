@@ -12,10 +12,11 @@ import ru.bambolumba.durabilitynotifier.Utils.DurabilityUtil;
 public class ItemDamageListener implements Listener {
 
     private final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
-    private final DurabilityUtil durabilityUtil = plugin.getDurabilityUtil();
 
     @EventHandler
     public void onItemDamage(PlayerItemDamageEvent event) {
+
+        DurabilityUtil durabilityUtil = plugin.getDurabilityUtil();
 
         ItemStack itemStack = event.getItem();
         Player player = event.getPlayer();
@@ -24,10 +25,13 @@ public class ItemDamageListener implements Listener {
             return;
         }
 
-        if (durabilityUtil.getDurability(itemStack, (Damageable) itemStack.getItemMeta()) - event.getDamage() <= 0) {
-            durabilityUtil.sendBreakNotification(player, itemStack);
+        Damageable damageable = (Damageable) itemStack.getItemMeta();
+        int durability = durabilityUtil.getDurability(itemStack, damageable) - event.getDamage();
+
+        if (durability <= 0) {
+            durabilityUtil.sendBreakNotification(player, itemStack, durability);
         } else {
-            durabilityUtil.sendDamageNotification(player, itemStack);
+            durabilityUtil.sendDamageNotification(player, itemStack, durability);
         }
 
     }
