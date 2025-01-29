@@ -1,5 +1,6 @@
 package ru.bambolumba.durabilitynotifier.Utils;
 
+import it.unimi.dsi.fastutil.Pair;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -17,12 +18,22 @@ public class MessageUtil {
         return miniMessage.deserialize(message);
     }
 
-    public static Component build(String message, String match, String replacement) {
+    /*
+    This method allows to use any number of replacements
+     */
+    public static Component build(String message, List<Pair<String, String>> replacements) {
         MiniMessage miniMessage = MiniMessage.miniMessage();
-        return miniMessage.deserialize(message).replaceText(TextReplacementConfig.builder()
-                .match(match)
-                .replacement(replacement)
-                .build());
+        Component component = miniMessage.deserialize(message);
+
+        // Применение всех замен
+        for (Pair<String, String> replacement : replacements) {
+            component = component.replaceText(TextReplacementConfig.builder()
+                    .match(replacement.left())
+                    .replacement(replacement.right())
+                    .build());
+        }
+
+        return component;
     }
 
     public static Component build(String message, boolean isFinal) {

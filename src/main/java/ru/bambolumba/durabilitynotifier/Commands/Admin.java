@@ -1,5 +1,6 @@
 package ru.bambolumba.durabilitynotifier.Commands;
 
+import it.unimi.dsi.fastutil.Pair;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,6 +11,8 @@ import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
+
+import java.util.List;
 
 public class Admin {
 
@@ -86,8 +89,12 @@ public class Admin {
                 plugin.getLogger().info("Message text: " + messageType.getText());
                 plugin.getLogger().info("Bar text: " + actionBarType.getText());
 
-                player.sendMessage(MessageUtil.build(messageType.getText(), "\\{item\\}", itemName));
-                player.sendActionBar(MessageUtil.build(actionBarType.getText(), "\\{item\\}", itemName));
+                List<Pair<String, String>> replacements = List.of(
+                        Pair.of("{item}", itemName)
+                );
+
+                player.sendMessage(MessageUtil.build(messageType.getText(), replacements));
+                player.sendActionBar(MessageUtil.build(actionBarType.getText(), replacements));
 
                 return true;
             }

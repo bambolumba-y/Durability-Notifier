@@ -1,5 +1,6 @@
 package ru.bambolumba.durabilitynotifier.Utils;
 
+import it.unimi.dsi.fastutil.Pair;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -7,6 +8,8 @@ import org.bukkit.inventory.meta.Damageable;
 import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
 import ru.bambolumba.durabilitynotifier.Notifications.ActionBarType;
 import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
+
+import java.util.List;
 
 public class DurabilityUtil {
 
@@ -40,12 +43,17 @@ public class DurabilityUtil {
 
             String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
 
+            List<Pair<String, String>> replacements = List.of(
+                    Pair.of("{item}", itemName),
+                    Pair.of("{durability}", String.valueOf(durability))
+            );
+
             if (messageType.isEnabled()) {
-                player.sendMessage(MessageUtil.build(messageType.getText(), "\\{item\\}", itemName));
+                player.sendMessage(MessageUtil.build(messageType.getText(), replacements));
             }
 
             if (actionBarType.isEnabled()) {
-                player.sendActionBar(MessageUtil.build(actionBarType.getText(), "\\{item\\}", itemName));
+                player.sendActionBar(MessageUtil.build(actionBarType.getText(), replacements));
             }
 
         }
