@@ -11,3 +11,6 @@ permissions:
   durability.admin:
     default: op
     description: Allows to use admin subcommand
+  durability.notify:
+    default: true
+    description: Allow to receive notifications
