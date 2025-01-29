@@ -49,7 +49,7 @@ public class Admin {
 
             ActionBarType actionBarType = plugin.getActionBar();
             MessageType messageType = plugin.getMessage();
-            SoundType soundType = plugin.getSoundType();
+            SoundType soundType = plugin.getSound();
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
