@@ -34,11 +34,34 @@ public class Admin {
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
 
+        /*
+            ./durability admin preview
+            Send the preview of notifications
+        */
+        if (args[1].equalsIgnoreCase("preview")) {
+
+            ActionBarType actionBarType = plugin.getActionBar();
+            MessageType messageType = plugin.getMessage();
+
+            plugin.getLogger().info("ItemName: " + itemName);
+            plugin.getLogger().info("Message text: " + messageType.getText());
+            plugin.getLogger().info("Bar text: " + actionBarType.getText());
+
+            List<Pair<String, String>> replacements = List.of(
+                    Pair.of("{item}", itemName)
+            );
+
+            player.sendMessage(MessageUtil.build(messageType.getText(), replacements));
+            player.sendActionBar(MessageUtil.build(actionBarType.getText(), replacements));
+
+            return true;
+        }
+
         if (args.length == 3) {
 
             /*
-            /durability admin set {value}
-            set the item durability to the specified amount. I don't know why you might need it.
+                /durability admin set {value}
+                set the item durability to the specified amount. I don't know why you might need it.
             */
             if (args[1].equalsIgnoreCase("set")) {
 
@@ -68,33 +91,6 @@ public class Admin {
                 itemStack.setItemMeta(damageable);
                 player.getInventory().setItemInMainHand(itemStack);
                 player.sendMessage(MessageUtil.build("admin.durability-changed"));
-
-                return true;
-            }
-
-        }
-
-        if (args.length == 2) {
-
-            /*
-            ./durability admin preview
-            Send the preview of notifications
-            */
-            if (args[1].equalsIgnoreCase("preview")) {
-
-                ActionBarType actionBarType = plugin.getActionBar();
-                MessageType messageType = plugin.getMessage();
-
-                plugin.getLogger().info("ItemName: " + itemName);
-                plugin.getLogger().info("Message text: " + messageType.getText());
-                plugin.getLogger().info("Bar text: " + actionBarType.getText());
-
-                List<Pair<String, String>> replacements = List.of(
-                        Pair.of("{item}", itemName)
-                );
-
-                player.sendMessage(MessageUtil.build(messageType.getText(), replacements));
-                player.sendActionBar(MessageUtil.build(actionBarType.getText(), replacements));
 
                 return true;
             }
