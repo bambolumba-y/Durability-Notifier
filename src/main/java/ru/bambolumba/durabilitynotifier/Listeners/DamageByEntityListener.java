@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
 import ru.bambolumba.durabilitynotifier.Utils.DurabilityUtil;
 
-public class DamageListener implements Listener {
+public class DamageByEntityListener implements Listener {
 
     private final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
     private final DurabilityUtil durabilityUtil = plugin.getDurabilityUtil();
