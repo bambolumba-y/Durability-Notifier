@@ -47,7 +47,7 @@ public final class DurabilityNotifier extends JavaPlugin {
         return actionBarType;
     }
 
-    public SoundType getSoundType() {
+    public SoundType getSound() {
         return soundType;
     }
 
@@ -59,6 +59,7 @@ public final class DurabilityNotifier extends JavaPlugin {
         messageType = new MessageType();
         actionBarType = new ActionBarType();
         soundType = new SoundType();
+        durabilityUtil = new DurabilityUtil();
     }
 
 }

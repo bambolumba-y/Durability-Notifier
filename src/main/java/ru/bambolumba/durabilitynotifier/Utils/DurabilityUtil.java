@@ -15,13 +15,15 @@ import java.util.List;
 
 public class DurabilityUtil {
 
-    private final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
-    private final MessageType messageType = plugin.getMessage();
-    private final ActionBarType actionBarType = plugin.getActionBar();
-    private final SoundType soundType = plugin.getSoundType();
+    private final MessageType messageType;
+    private final ActionBarType actionBarType;
+    private final SoundType soundType;
 
     public DurabilityUtil() {
-
+        DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
+        this.messageType = plugin.getMessage();
+        this.actionBarType = plugin.getActionBar();
+        this.soundType = plugin.getSound();
     }
 
     public int getDurability(ItemStack itemStack, Damageable damageable) {
@@ -32,15 +34,13 @@ public class DurabilityUtil {
         return durability < ConfigManager.getConfig().getInt("notifications.required-durability");
     }
 
-    public void sendDamageNotification(Player player, ItemStack itemStack) {
+    public void sendDamageNotification(Player player, ItemStack itemStack, int durability) {
 
         Damageable damageable = (Damageable) itemStack.getItemMeta();
 
         if (!damageable.hasDamageValue()) {
             return;
         }
-
-        int durability = getDurability(itemStack, damageable);
 
         if (isDurabilityLow(durability)) {
 
@@ -67,7 +67,7 @@ public class DurabilityUtil {
 
     }
 
-    public void sendBreakNotification(Player player, ItemStack itemStack) {
+    public void sendBreakNotification(Player player, ItemStack itemStack, int durability) {
 
         Damageable damageable = (Damageable) itemStack.getItemMeta();
 
@@ -75,15 +75,13 @@ public class DurabilityUtil {
             return;
         }
 
-        int durability = getDurability(itemStack, damageable);
-
         if (isDurabilityLow(durability)) {
 
             String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
-                    Pair.of("\\{durability\\}", String.valueOf(0))
+                    Pair.of("\\{durability\\}", String.valueOf(durability))
             );
 
             if (messageType.isEnabled()) {
