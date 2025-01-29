@@ -1,16 +1,18 @@
 package ru.bambolumba.durabilitynotifier.Commands;
 
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import ru.bambolumba.durabilitynotifier.Notifications.ActionBarType;
+import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.ProjectDurability;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
 public class Admin {
+
+    private ProjectDurability plugin = ProjectDurability.getPlugin(ProjectDurability.class);
 
     public boolean execute(Player player, String[] args) {
 
@@ -26,12 +28,14 @@ public class Admin {
         }
 
         if (args.length == 3) {
+
+            //./durability admin set {value}
+            //set the item durability to the specified amount. I don't know why you might need it.
             if (args[1].equalsIgnoreCase("set")) {
 
                 ItemStack itemStack = player.getInventory().getItemInMainHand();
 
                 if (itemStack.getType() == Material.AIR) {
-                    ProjectDurability.getPlugin(ProjectDurability.class).getLogger().info("No item in hand");
                     return true;
                 }
 
@@ -54,7 +58,23 @@ public class Admin {
                 itemStack.setItemMeta(damageable);
                 player.getInventory().setItemInMainHand(itemStack);
                 player.sendMessage(MessageUtil.build("admin.durability-changed"));
+
+                return true;
             }
+
+            //./durability admin preview
+            //Send the preview of notifications
+            if (args[1].equalsIgnoreCase("preview")) {
+
+                ActionBarType actionBarType = plugin.getActionBar();
+                MessageType messageType = plugin.getMessage();
+
+                player.sendMessage(ConfigManager.buildMessage(messageType.getText(), true));
+                player.sendActionBar(ConfigManager.buildMessage(actionBarType.getText(), true));
+
+                return true;
+            }
+
         }
 
         return false;
