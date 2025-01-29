@@ -1,5 +1,6 @@
 package ru.bambolumba.durabilitynotifier.Commands;
 
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -27,13 +28,14 @@ public class Admin {
             return true;
         }
 
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
+
         if (args.length == 3) {
 
             //./durability admin set {value}
             //set the item durability to the specified amount. I don't know why you might need it.
             if (args[1].equalsIgnoreCase("set")) {
-
-                ItemStack itemStack = player.getInventory().getItemInMainHand();
 
                 if (itemStack.getType() == Material.AIR) {
                     return true;
@@ -73,8 +75,8 @@ public class Admin {
                 ActionBarType actionBarType = plugin.getActionBar();
                 MessageType messageType = plugin.getMessage();
 
-                player.sendMessage(ConfigManager.buildMessage(messageType.getText(), true));
-                player.sendActionBar(ConfigManager.buildMessage(actionBarType.getText(), true));
+                player.sendMessage(MessageUtil.build(messageType.getText(), "{item}", itemName));
+                player.sendMessage(MessageUtil.build(actionBarType.getText(), "{item}", itemName));
 
                 return true;
             }
