@@ -55,6 +55,7 @@ public class TabComplete implements TabCompleter {
             }
         }
 
+        arguments.clear();
 
         return null;
     }
