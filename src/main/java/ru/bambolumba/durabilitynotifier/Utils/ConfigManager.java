@@ -11,12 +11,12 @@ import java.io.File;
 
 public class ConfigManager {
 
-    static ProjectDurability instance = ProjectDurability.getPlugin(ProjectDurability.class);
+    static ProjectDurability plugin = ProjectDurability.getPlugin(ProjectDurability.class);
     private static FileConfiguration messageConfig;
 
     public static void createConfigFiles() {
 
-        instance.saveDefaultConfig();
+        plugin.saveDefaultConfig();
         createMessageConfig();
 
     }
@@ -26,15 +26,15 @@ public class ConfigManager {
     }
 
     public static FileConfiguration getConfig() {
-        return instance.getConfig();
+        return plugin.getConfig();
     }
 
     private static void createMessageConfig() {
 
-        File messageConfigFile = new File(instance.getDataFolder(), "messages.yml");
+        File messageConfigFile = new File(plugin.getDataFolder(), "messages.yml");
         if (!messageConfigFile.exists()) {
             messageConfigFile.getParentFile().mkdirs();
-            instance.saveResource("messages.yml", false);
+            plugin.saveResource("messages.yml", false);
         }
 
         messageConfig = YamlConfiguration.loadConfiguration(messageConfigFile);
@@ -68,8 +68,9 @@ public class ConfigManager {
     }
 
     public static void reloadConfigFiles() {
-        instance.reloadConfig();
+        plugin.reloadConfig();
         createMessageConfig();
+        plugin.applyNotificationsUpdate();
     }
 
 }

@@ -39,4 +39,9 @@ public final class ProjectDurability extends JavaPlugin {
         return actionBarType;
     }
 
+    public void applyNotificationsUpdate() {
+        actionBarType.update();
+        messageType.update();
+    }
+
 }
