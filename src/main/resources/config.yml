@@ -1,15 +1,23 @@
-#You can use HEX colors with this formats: #FFFFFF or <color:#FFFFFF>
+#You can use HEX colors with this formats: <color:#FFFFFF>
 #This plugin use MiniMessage, so either you can yse every format tags from it. MiniMessage format: https://docs.advntr.dev/minimessage/format.html
-#You can use placeholders from PlaceholderAPI and internal plugin placeholders:
+#You can use internal plugin placeholders:
 #1. {item} - the item for which the notification was triggered
+#2. {durability} - how much durability is left
+
+#You can find sounds names for example here: https://jd.papermc.io/paper/1.21.4/org/bukkit/Sound.html
 
 notifications:
-  enabled: true
-  required-percentage: 10 #When X percent of the durability remains, a notification will be triggered.
+  required-durability: 10 #When it drops below this value, the player will receive a notification every time the durability changes.
   types:
     message: #will send notification in chat
       enabled: true
-      text: "<color:#00f05e><bold>|</bold></color> Your {item} has low durability left!"
-    action-bar:
+      damage-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left!"
+      break-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> is broken :("
+    action-bar: #will send notification in action-bar
       enabled: true
-      text: "<color:#00f05e><bold>|</bold></color> Your {item} has low durability left!"
+      damage-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left!"
+      break-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> is broken :("
+    sound:
+      enabled: true
+      damage-sound: ITEM_CROSSBOW_HIT
+      break-sound: ENTITY_VEX_DEATH

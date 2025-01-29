@@ -1,6 +1,6 @@
 # See https://github.com/Vadorequest/JetBrains-Intellij-IDEA-.gitignore-best-practices
 # Ignore all .idea files by default, except files listed below (whitelist-style)
-*
+.idea/vcs.xml
 
 # .gitignore file
 # The .gitignore file defines which files and directories should be ignored by Git in the project.
@@ -9,18 +9,6 @@
 # ignore rules, leading to inconsistencies in which files are tracked or ignored.
 # By committing the .gitignore file, we ensure that the entire team maintains the same
 !.gitignore
-
-# Version Control configuration for your project
-# This file contains the configuration of the version control system (VCS) that the project uses.
-# By committing this file, all team members will have a consistent VCS setup, ensuring everyone
-# uses the same tool (e.g., Git, Mercurial) and configuration within the IDE.
-!vcs.xml
-
-# Encodings
-# This file stores the character encoding settings for your project.
-# It’s crucial to ensure that all team members use the same file encoding to avoid
-# issues related to character representation, especially in projects with diverse languages or special characters.
-!encodings.xml
 
 # Code Style Settings
 # This file contains the code style configuration (like indentation, spaces, and braces).
