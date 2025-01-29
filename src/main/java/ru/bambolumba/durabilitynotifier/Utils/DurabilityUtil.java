@@ -10,19 +10,23 @@ import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 
 public class DurabilityUtil {
 
-    private static final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
-    private static final MessageType messageType = plugin.getMessage();
-    private static final ActionBarType actionBarType = plugin.getActionBar();
+    private final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
+    private final MessageType messageType = plugin.getMessage();
+    private final ActionBarType actionBarType = plugin.getActionBar();
 
-    public static int getDurability(ItemStack itemStack, Damageable damageable) {
+    public DurabilityUtil() {
+
+    }
+
+    public int getDurability(ItemStack itemStack, Damageable damageable) {
         return itemStack.getType().getMaxDurability() - damageable.getDamage();
     }
 
-    public static boolean isDurabilityLow(int durability) {
+    public boolean isDurabilityLow(int durability) {
         return durability < ConfigManager.getConfig().getInt("notifications.required-durability");
     }
 
-    public static void sendNotification(Player player, ItemStack itemStack) {
+    public void sendNotification(Player player, ItemStack itemStack) {
 
         Damageable damageable = (Damageable) itemStack.getItemMeta();
 
@@ -30,9 +34,9 @@ public class DurabilityUtil {
             return;
         }
 
-        int durability = DurabilityUtil.getDurability(itemStack, damageable);
+        int durability = getDurability(itemStack, damageable);
 
-        if (DurabilityUtil.isDurabilityLow(durability)) {
+        if (isDurabilityLow(durability)) {
 
             String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
 
