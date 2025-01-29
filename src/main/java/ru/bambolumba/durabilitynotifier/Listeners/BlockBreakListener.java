@@ -1,5 +1,6 @@
 package ru.bambolumba.durabilitynotifier.Listeners;
 
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,11 +24,13 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         ItemStack itemStack = player.getInventory().getItemInMainHand();
 
-        if (itemStack.getType() != Material.AIR) {
+        if (itemStack.getType() == Material.AIR) {
+            plugin.getLogger().info("No item in hand");
             return;
         }
 
-        if (!(itemStack instanceof Damageable damageable)) {
+        if (!(itemStack.getItemMeta() instanceof Damageable damageable)) {
+            plugin.getLogger().info("This item is not damageable");
             return;
         }
 
@@ -38,7 +41,7 @@ public class BlockBreakListener implements Listener {
 
         if (DurabilityUtil.isDurabilityLow(durability)) {
 
-            String itemName = itemStack.displayName().toString();
+            String itemName = PlainTextComponentSerializer.plainText().serialize(itemStack.displayName());
 
             if (messageType.isEnabled()) {
                 String finalMessage = messageType.getText().replace("{item}", itemName);
@@ -47,7 +50,7 @@ public class BlockBreakListener implements Listener {
 
             if (actionBarType.isEnabled()) {
                 String finalMessage = actionBarType.getText().replace("{item}", itemName);
-                player.sendActionBar(MessageUtil.build(finalMessage));
+                player.sendActionBar(MessageUtil.build(finalMessage, true));
             }
 
         }
