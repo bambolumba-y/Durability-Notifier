@@ -1,4 +1,4 @@
-#You can use HEX colors with this formats: #FFFFFF or <color:#FFFFFF>
+#You can use HEX colors with this formats: <color:#FFFFFF>
 #This plugin use MiniMessage, so either you can yse every format tags from it. MiniMessage format: https://docs.advntr.dev/minimessage/format.html
 #You can use placeholders from PlaceholderAPI and internal plugin placeholders:
 #1. {item} - the item for which the notification was triggered
@@ -8,7 +8,7 @@ notifications:
   types:
     message: #will send notification in chat
       enabled: true
-      text: "<color:#00f05e><bold>|</bold></color> Your {item} has low durability left!"
+      text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left!"
     action-bar:
       enabled: true
-      text: "<color:#00f05e><bold>|</bold></color> Your {item} has low durability left!"
+      text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left!"
