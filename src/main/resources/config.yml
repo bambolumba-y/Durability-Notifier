@@ -11,12 +11,12 @@ notifications:
   types:
     message: #will send notification in chat
       enabled: true
-      damage-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left!"
-      break-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> is broken :("
+      damage-text: "<color:#fe6f5e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left! It`s <color:#60d65e>{durability}</color> left."
+      break-text: "<color:#fe6f5e><bold>|</bold></color> Your <color:#60d65e>{item}</color> is broken :("
     action-bar: #will send notification in action-bar
       enabled: true
-      damage-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left!"
-      break-text: "<color:#00f05e><bold>|</bold></color> Your <color:#60d65e>{item}</color> is broken :("
+      damage-text: "<color:#fe6f5e><bold>|</bold></color> Your <color:#60d65e>{item}</color> has low durability left! It`s <color:#60d65e>{durability}</color> left."
+      break-text: "<color:#fe6f5e><bold>|</bold></color> Your <color:#60d65e>{item}</color> is broken :("
     sound:
       enabled: true
       damage-sound: ITEM_CROSSBOW_HIT
