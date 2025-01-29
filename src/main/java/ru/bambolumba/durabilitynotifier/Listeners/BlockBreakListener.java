@@ -16,7 +16,7 @@ import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
 public class BlockBreakListener implements Listener {
 
-    private ProjectDurability plugin = ProjectDurability.getPlugin(ProjectDurability.class);
+    private final ProjectDurability plugin = ProjectDurability.getPlugin(ProjectDurability.class);
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
