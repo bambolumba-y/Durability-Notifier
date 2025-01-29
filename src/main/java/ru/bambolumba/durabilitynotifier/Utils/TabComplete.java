@@ -28,10 +28,10 @@ public class TabComplete implements TabCompleter {
         }
 
         arguments.clear();
+        arguments.add("reload"); arguments.add("set"); arguments.add("preview");
 
         if (args.length == 2) {
-            if (args[1].equalsIgnoreCase("admin")) {
-                arguments.add("reload"); arguments.add("set"); arguments.add("preview");
+            if (args[0].equalsIgnoreCase("admin")) {
                 for (String a : arguments) {
                     if (a.toLowerCase().startsWith(args[1].toLowerCase())) {
                         result.add(a);
@@ -40,6 +40,21 @@ public class TabComplete implements TabCompleter {
                 return result;
             }
         }
+
+        arguments.clear();
+        arguments.add("damage"); arguments.add("break");
+
+        if (args.length == 3) {
+            if (args[1].equalsIgnoreCase("preview")) {
+                for (String a : arguments) {
+                    if (a.toLowerCase().startsWith(args[2].toLowerCase())) {
+                        result.add(a);
+                    }
+                }
+                return result;
+            }
+        }
+
 
         return null;
     }
