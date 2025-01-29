@@ -23,7 +23,7 @@ public class ItemDamageListener implements Listener {
             return;
         }
 
-        durabilityUtil.sendNotification(player, itemStack);
+        durabilityUtil.sendDamageNotification(player, itemStack);
 
     }
 
