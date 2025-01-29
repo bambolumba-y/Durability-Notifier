@@ -33,8 +33,10 @@ public class Admin {
 
         if (args.length == 3) {
 
-            //./durability admin set {value}
-            //set the item durability to the specified amount. I don't know why you might need it.
+            /*
+            /durability admin set {value}
+            set the item durability to the specified amount. I don't know why you might need it.
+            */
             if (args[1].equalsIgnoreCase("set")) {
 
                 if (itemStack.getType() == Material.AIR) {
@@ -43,7 +45,10 @@ public class Admin {
 
                 Damageable damageable = (Damageable) itemStack.getItemMeta();
 
-                if (!damageable.hasDamageValue()) {
+                /*
+                We need to check the maximum durability because damageable.hasDamageValue will return false if it is a brand new item with no damage.
+                 */
+                if (!(itemStack.getType().getMaxDurability() > 0)) {
                     player.sendMessage(MessageUtil.build("error.admin.not-damageable-item"));
                     return true;
                 }
@@ -68,8 +73,10 @@ public class Admin {
 
         if (args.length == 2) {
 
-            //./durability admin preview
-            //Send the preview of notifications
+            /*
+            ./durability admin preview
+            Send the preview of notifications
+            */
             if (args[1].equalsIgnoreCase("preview")) {
 
                 ActionBarType actionBarType = plugin.getActionBar();
