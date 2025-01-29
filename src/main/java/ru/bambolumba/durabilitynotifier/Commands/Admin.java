@@ -3,12 +3,14 @@ package ru.bambolumba.durabilitynotifier.Commands;
 import it.unimi.dsi.fastutil.Pair;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Material;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import ru.bambolumba.durabilitynotifier.Notifications.ActionBarType;
 import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
+import ru.bambolumba.durabilitynotifier.Notifications.SoundType;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
@@ -42,17 +44,22 @@ public class Admin {
 
             ActionBarType actionBarType = plugin.getActionBar();
             MessageType messageType = plugin.getMessage();
-
-            plugin.getLogger().info("ItemName: " + itemName);
-            plugin.getLogger().info("Message text: " + messageType.getText());
-            plugin.getLogger().info("Bar text: " + actionBarType.getText());
+            SoundType soundType = plugin.getSoundType();
 
             List<Pair<String, String>> replacements = List.of(
-                    Pair.of("{item}", itemName)
-            );
+                    Pair.of("{item}", itemName),
+                    Pair.of("{durability}", String.valueOf(0)
+            ));
 
-            player.sendMessage(MessageUtil.build(messageType.getText(), replacements));
-            player.sendActionBar(MessageUtil.build(actionBarType.getText(), replacements));
+            if (args[2].equalsIgnoreCase("damage")) {
+                player.sendMessage(MessageUtil.build(messageType.getDamageText(), replacements));
+                player.sendActionBar(MessageUtil.build(actionBarType.getDamageText(), replacements));
+                player.playSound(player.getLocation(), soundType.getDamageSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+            } else if (args[2].equalsIgnoreCase("break")) {
+                player.sendMessage(MessageUtil.build(messageType.getBreakText(), replacements));
+                player.sendActionBar(MessageUtil.build(actionBarType.getBreakText(), replacements));
+                player.playSound(player.getLocation(), soundType.getBreakSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+            }
 
             return true;
         }
