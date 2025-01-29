@@ -1,6 +1,6 @@
-name: ProjectDurability
+name: DurabilityNotifier
 version: '${project.version}'
-main: ru.bambolumba.durabilitynotifier.ProjectDurability
+main: ru.bambolumba.durabilitynotifier.DurabilityNotifier
 api-version: '1.21'
 
 commands:

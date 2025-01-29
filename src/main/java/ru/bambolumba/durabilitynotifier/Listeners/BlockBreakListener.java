@@ -10,13 +10,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import ru.bambolumba.durabilitynotifier.Notifications.ActionBarType;
 import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
-import ru.bambolumba.durabilitynotifier.ProjectDurability;
+import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
 import ru.bambolumba.durabilitynotifier.Utils.DurabilityUtil;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
 public class BlockBreakListener implements Listener {
 
-    private final ProjectDurability plugin = ProjectDurability.getPlugin(ProjectDurability.class);
+    private final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {

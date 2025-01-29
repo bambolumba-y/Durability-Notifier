@@ -1,6 +1,6 @@
 #You can use HEX colors with this formats: <color:#FFFFFF>
 #This plugin use MiniMessage, so either you can yse every format tags from it. MiniMessage format: https://docs.advntr.dev/minimessage/format.html
-#You can use placeholders from PlaceholderAPI and internal plugin placeholders:
+#You can use internal plugin placeholders:
 #1. {item} - the item for which the notification was triggered
 
 notifications:

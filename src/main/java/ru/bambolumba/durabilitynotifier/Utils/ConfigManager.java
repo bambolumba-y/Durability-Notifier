@@ -5,13 +5,13 @@ import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import ru.bambolumba.durabilitynotifier.ProjectDurability;
+import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
 
 import java.io.File;
 
 public class ConfigManager {
 
-    static ProjectDurability plugin = ProjectDurability.getPlugin(ProjectDurability.class);
+    static DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
     private static FileConfiguration messageConfig;
 
     public static void createConfigFiles() {

@@ -6,13 +6,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import ru.bambolumba.durabilitynotifier.Notifications.ActionBarType;
 import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
-import ru.bambolumba.durabilitynotifier.ProjectDurability;
+import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
 public class Admin {
 
-    private ProjectDurability plugin = ProjectDurability.getPlugin(ProjectDurability.class);
+    private final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
 
     public boolean execute(Player player, String[] args) {
 

@@ -7,7 +7,7 @@ import ru.bambolumba.durabilitynotifier.Notifications.ActionBarType;
 import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 
-public final class ProjectDurability extends JavaPlugin {
+public final class DurabilityNotifier extends JavaPlugin {
 
     private MessageType messageType;
     private ActionBarType actionBarType;
