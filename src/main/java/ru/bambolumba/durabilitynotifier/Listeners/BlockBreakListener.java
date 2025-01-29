@@ -32,6 +32,7 @@ public class BlockBreakListener implements Listener {
         }
 
         int durability = DurabilityUtil.getDurability(itemStack, damageable);
+        plugin.getLogger().info("Durability of " + itemStack.displayName() + " = " + durability);
         MessageType messageType = plugin.getMessage();
         ActionBarType actionBarType = plugin.getActionBar();
 
