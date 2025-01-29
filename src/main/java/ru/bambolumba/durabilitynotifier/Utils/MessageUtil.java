@@ -44,4 +44,8 @@ public class MessageUtil {
         }
     }
 
+    public static String removeBrackets(String text) {
+        return text.replace("[", "").replace("]", "");
+    }
+
 }
