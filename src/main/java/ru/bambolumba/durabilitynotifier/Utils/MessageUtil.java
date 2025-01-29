@@ -17,8 +17,7 @@ public class MessageUtil {
         return miniMessage.deserialize(message);
     }
 
-    public static Component build(String configPath, String match, String replacement) {
-        String message = getMessageConfig().getString(configPath);
+    public static Component build(String message, String match, String replacement) {
         MiniMessage miniMessage = MiniMessage.miniMessage();
         return miniMessage.deserialize(message).replaceText(TextReplacementConfig.builder()
                 .match(match)

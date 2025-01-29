@@ -75,8 +75,12 @@ public class Admin {
                 ActionBarType actionBarType = plugin.getActionBar();
                 MessageType messageType = plugin.getMessage();
 
-                player.sendMessage(MessageUtil.build(messageType.getText(), "{item}", itemName));
-                player.sendMessage(MessageUtil.build(actionBarType.getText(), "{item}", itemName));
+                plugin.getLogger().info("ItemName: " + itemName);
+                plugin.getLogger().info("Message text: " + messageType.getText());
+                plugin.getLogger().info("Bar text: " + actionBarType.getText());
+
+                player.sendMessage(MessageUtil.build(messageType.getText(), "\\{item\\}", itemName));
+                player.sendActionBar(MessageUtil.build(actionBarType.getText(), "\\{item\\}", itemName));
 
                 return true;
             }

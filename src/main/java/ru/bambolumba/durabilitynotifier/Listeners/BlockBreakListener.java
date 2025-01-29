@@ -43,11 +43,11 @@ public class BlockBreakListener implements Listener {
             String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
 
             if (messageType.isEnabled()) {
-                player.sendMessage(MessageUtil.build(messageType.getText(), "{item}", itemName));
+                player.sendMessage(MessageUtil.build(messageType.getText(), "\\{item\\}", itemName));
             }
 
             if (actionBarType.isEnabled()) {
-                player.sendMessage(MessageUtil.build(actionBarType.getText(), "{item}", itemName));
+                player.sendActionBar(MessageUtil.build(actionBarType.getText(), "\\{item\\}", itemName));
             }
 
         }

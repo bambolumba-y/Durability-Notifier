@@ -10,7 +10,7 @@ public class DurabilityUtil {
     }
 
     public static boolean isDurabilityLow(int durability) {
-        return durability < ConfigManager.getConfig().getInt("notifications.required-percentage");
+        return durability < ConfigManager.getConfig().getInt("notifications.required-durability");
     }
 
 }
