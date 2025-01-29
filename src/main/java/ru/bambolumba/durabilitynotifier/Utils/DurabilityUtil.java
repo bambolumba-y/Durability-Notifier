@@ -47,8 +47,8 @@ public class DurabilityUtil {
             String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
 
             List<Pair<String, String>> replacements = List.of(
-                    Pair.of("{item}", itemName),
-                    Pair.of("{durability}", String.valueOf(durability))
+                    Pair.of("\\{item\\}", itemName),
+                    Pair.of("\\{durability\\}", String.valueOf(durability))
             );
 
             if (messageType.isEnabled()) {
@@ -82,8 +82,8 @@ public class DurabilityUtil {
             String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
 
             List<Pair<String, String>> replacements = List.of(
-                    Pair.of("{item}", itemName),
-                    Pair.of("{durability}", String.valueOf(0))
+                    Pair.of("\\{item\\}", itemName),
+                    Pair.of("\\{durability\\}", String.valueOf(0))
             );
 
             if (messageType.isEnabled()) {

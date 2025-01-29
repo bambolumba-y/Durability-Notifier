@@ -47,8 +47,8 @@ public class Admin {
             SoundType soundType = plugin.getSoundType();
 
             List<Pair<String, String>> replacements = List.of(
-                    Pair.of("{item}", itemName),
-                    Pair.of("{durability}", String.valueOf(0)
+                    Pair.of("\\{item\\}", itemName),
+                    Pair.of("\\{durability\\}", String.valueOf(0)
             ));
 
             if (args[2].equalsIgnoreCase("damage")) {
