@@ -8,6 +8,7 @@ import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.Notifications.SoundType;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
 import ru.bambolumba.durabilitynotifier.Utils.DurabilityUtil;
+import ru.bambolumba.durabilitynotifier.Utils.Metrics;
 import ru.bambolumba.durabilitynotifier.Utils.TabComplete;
 
 public final class DurabilityNotifier extends JavaPlugin {
@@ -19,6 +20,9 @@ public final class DurabilityNotifier extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        int pluginId = 24605; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
 
         messageType = new MessageType();
         actionBarType = new ActionBarType();
