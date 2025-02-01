@@ -24,5 +24,7 @@ You can send message in chat or action bar and play the sound to player.
 | command | description |
 |-------------|-------------|
 | /durability admin reload | Reload the config file |
-| /durability admin set <value> | Set durability of item in hand to this value |
-| /durability admin preview <damage/break> | Preview the specified notification |
+| /durability admin set (value) | Set durability of item in hand to this value |
+| /durability admin preview (damage/break) | Preview the specified notification |
+
+# [Hangar page](https://hangar.papermc.io/bambolumba-y/DurabilityNotifier)
