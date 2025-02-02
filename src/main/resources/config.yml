@@ -19,5 +19,5 @@ notifications:
       break-text: "<color:#fe6f5e><bold>|</bold></color> Your <color:#60d65e>{item}</color> is broken :("
     sound:
       enabled: true
-      damage-sound: ITEM_CROSSBOW_HIT
-      break-sound: ENTITY_VEX_DEATH
+      damage-sound: "ITEM_CROSSBOW_HIT"
+      break-sound: "ENTITY_VEX_DEATH"
