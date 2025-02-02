@@ -1,5 +1,5 @@
 # See https://github.com/Vadorequest/JetBrains-Intellij-IDEA-.gitignore-best-practices
 # Ignore all .idea files by default, except files listed below (whitelist-style)
-.idea
+.idea/
 
 !.gitignore
