@@ -20,6 +20,7 @@ public class ConfigManager {
     public static void createConfigFiles() {
 
         plugin.saveDefaultConfig();
+        plugin.reloadConfig();
         createMessageConfig();
 
     }
@@ -54,16 +55,16 @@ public class ConfigManager {
     Sound should be in format minecraft:example.example.example. If there would be _ instead of . , so this method will return null
      */
     public static Sound getSoundFromConfig(String path, Sound defaultSound) {
-        String soundName = getConfig().getString(path);
+        String soundName = plugin.getConfig().getString(path);
         if (soundName != null) {
             soundName = "minecraft:" + soundName;
             try {
                 NamespacedKey soundKey = NamespacedKey.fromString(soundName.toLowerCase().replace("_", "."));
                 if (soundKey != null) {
-                    Sound sound = Registry.SOUNDS.get(soundKey);
-                    return sound;
+                    return Registry.SOUNDS.get(soundKey);
                 }
             } catch (IllegalArgumentException e) {
+                plugin.getLogger().severe("Something went wrong when loading sound from config.");
             }
         }
         return defaultSound;
