@@ -52,15 +52,21 @@ public class DurabilityUtil {
             );
 
             if (messageType.isEnabled()) {
-                player.sendMessage(MessageUtil.build(messageType.getDamageText(), replacements));
+                if (!messageType.getDamageText().isEmpty()) {
+                    player.sendMessage(MessageUtil.build(messageType.getDamageText(), replacements));
+                }
             }
 
             if (actionBarType.isEnabled()) {
-                player.sendActionBar(MessageUtil.build(actionBarType.getDamageText(), replacements));
+                if (!actionBarType.getDamageText().isEmpty()) {
+                    player.sendActionBar(MessageUtil.build(actionBarType.getDamageText(), replacements));
+                }
             }
 
             if (soundType.isEnabled()) {
-                player.playSound(player.getLocation(), soundType.getDamageSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+                if (soundType.getDamageSound() != null) {
+                    player.playSound(player.getLocation(), soundType.getDamageSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+                }
             }
 
         }
@@ -85,15 +91,21 @@ public class DurabilityUtil {
             );
 
             if (messageType.isEnabled()) {
-                player.sendMessage(MessageUtil.build(messageType.getBreakText(), replacements));
+                if (!messageType.getBreakText().isEmpty()) {
+                    player.sendMessage(MessageUtil.build(messageType.getBreakText(), replacements));
+                }
             }
 
             if (actionBarType.isEnabled()) {
-                player.sendActionBar(MessageUtil.build(actionBarType.getBreakText(), replacements));
+                if (!actionBarType.getBreakText().isEmpty()) {
+                    player.sendActionBar(MessageUtil.build(actionBarType.getBreakText(), replacements));
+                }
             }
 
             if (soundType.isEnabled()) {
-                player.playSound(player.getLocation(), soundType.getBreakSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+                if (soundType.getBreakSound() != null) {
+                    player.playSound(player.getLocation(), soundType.getBreakSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+                }
             }
 
         }

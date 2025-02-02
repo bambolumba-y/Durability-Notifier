@@ -13,8 +13,8 @@ public class SoundType {
     private final Sound breakSound;
 
     public SoundType() {
-        this.damageSound = ConfigManager.getSoundFromConfig("notifications.types.sound.damage-sound", Sound.ENTITY_ARROW_HIT);
-        this.breakSound = ConfigManager.getSoundFromConfig("notifications.types.sound.break-sound", Sound.ENTITY_VEX_DEATH);
+        this.damageSound = ConfigManager.getSoundFromConfig("notifications.types.sound.damage-sound", null);
+        this.breakSound = ConfigManager.getSoundFromConfig("notifications.types.sound.break-sound", null);
         this.enabled = ConfigManager.getConfig().getBoolean("notifications.types.sound.enabled");
     }
 
