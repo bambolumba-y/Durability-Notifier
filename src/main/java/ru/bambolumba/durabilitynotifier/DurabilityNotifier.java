@@ -24,12 +24,12 @@ public final class DurabilityNotifier extends JavaPlugin {
         int pluginId = 24605; // <-- Replace with the id of your plugin!
         Metrics metrics = new Metrics(this, pluginId);
 
+        ConfigManager.createConfigFiles();
+
         messageType = new MessageType();
         actionBarType = new ActionBarType();
         soundType = new SoundType();
         durabilityUtil = new DurabilityUtil();
-
-        ConfigManager.createConfigFiles();
 
         getServer().getPluginManager().registerEvents(new ItemDamageListener(), this);
 
