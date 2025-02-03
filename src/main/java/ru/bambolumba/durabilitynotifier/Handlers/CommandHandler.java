@@ -4,14 +4,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import ru.bambolumba.durabilitynotifier.Commands.Admin;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
 public class CommandHandler implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] args) {
+    public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, @NonNull String @NonNull [] args) {
 
         if (commandSender instanceof Player player) {
 

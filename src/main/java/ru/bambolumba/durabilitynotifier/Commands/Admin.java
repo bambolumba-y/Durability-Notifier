@@ -1,7 +1,8 @@
 package ru.bambolumba.durabilitynotifier.Commands;
 
 import it.unimi.dsi.fastutil.Pair;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -22,6 +23,10 @@ public class Admin {
 
     public boolean execute(Player player, String[] args) {
 
+        if (args.length == 1) {
+            MessageUtil.sendUsage(player);
+        }
+
         if (!player.hasPermission("durability.admin")) {
             player.sendMessage(MessageUtil.build("error.common.not-allowed"));
             return true;
@@ -34,7 +39,13 @@ public class Admin {
         }
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
-        String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
+        String itemName;
+        if (itemStack.getItemMeta().hasDisplayName()) {
+            itemName = MessageUtil.removeBrackets(itemStack.getItemMeta().getDisplayName());
+        } else {
+            itemName = itemStack.getType().name().replace("_", " ").toLowerCase();
+        }
+        System.out.println(itemName);
 
         /*
             ./durability admin preview
@@ -58,11 +69,13 @@ public class Admin {
 
             if (args[2].equalsIgnoreCase("damage")) {
                 player.sendMessage(MessageUtil.build(messageType.getDamageText(), replacements));
-                player.sendActionBar(MessageUtil.build(actionBarType.getDamageText(), replacements));
+                player.spigot().sendMessage
+                        (ChatMessageType.ACTION_BAR, new TextComponent(MessageUtil.build(actionBarType.getDamageText(), replacements)));
                 player.playSound(player.getLocation(), soundType.getDamageSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
             } else if (args[2].equalsIgnoreCase("break")) {
                 player.sendMessage(MessageUtil.build(messageType.getBreakText(), replacements));
-                player.sendActionBar(MessageUtil.build(actionBarType.getBreakText(), replacements));
+                player.spigot().sendMessage
+                        (ChatMessageType.ACTION_BAR, new TextComponent(MessageUtil.build(actionBarType.getBreakText(), replacements)));
                 player.playSound(player.getLocation(), soundType.getBreakSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
             }
 

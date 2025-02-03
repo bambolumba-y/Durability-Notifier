@@ -1,7 +1,8 @@
 package ru.bambolumba.durabilitynotifier.Utils;
 
 import it.unimi.dsi.fastutil.Pair;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -15,9 +16,11 @@ import java.util.List;
 
 public class DurabilityUtil {
 
+    private final DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
     private final MessageType messageType;
     private final ActionBarType actionBarType;
     private final SoundType soundType;
+
 
     public DurabilityUtil() {
         DurabilityNotifier plugin = DurabilityNotifier.getPlugin(DurabilityNotifier.class);
@@ -38,13 +41,18 @@ public class DurabilityUtil {
 
         Damageable damageable = (Damageable) itemStack.getItemMeta();
 
-        if (!damageable.hasDamageValue()) {
+        if (!damageable.hasDamage()) {
             return;
         }
 
         if (isDurabilityLow(durability)) {
 
-            String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
+            String itemName;
+            if (itemStack.getItemMeta().hasDisplayName()) {
+                itemName = MessageUtil.removeBrackets(itemStack.getItemMeta().getDisplayName());
+            } else {
+                itemName = itemStack.getType().name().replace("_", " ").toLowerCase();
+            }
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
@@ -59,7 +67,8 @@ public class DurabilityUtil {
 
             if (actionBarType.isEnabled()) {
                 if (!actionBarType.getDamageText().isEmpty()) {
-                    player.sendActionBar(MessageUtil.build(actionBarType.getDamageText(), replacements));
+                    player.spigot().sendMessage
+                            (ChatMessageType.ACTION_BAR, new TextComponent(MessageUtil.build(actionBarType.getDamageText(), replacements)));
                 }
             }
 
@@ -77,13 +86,18 @@ public class DurabilityUtil {
 
         Damageable damageable = (Damageable) itemStack.getItemMeta();
 
-        if (!damageable.hasDamageValue()) {
+        if (!damageable.hasDamage()) {
             return;
         }
 
         if (isDurabilityLow(durability)) {
 
-            String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
+            String itemName;
+            if (itemStack.getItemMeta().hasDisplayName()) {
+                itemName = MessageUtil.removeBrackets(itemStack.getItemMeta().getDisplayName());
+            } else {
+                itemName = itemStack.getType().name().replace("_", " ").toLowerCase();
+            }
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
@@ -98,7 +112,8 @@ public class DurabilityUtil {
 
             if (actionBarType.isEnabled()) {
                 if (!actionBarType.getBreakText().isEmpty()) {
-                    player.sendActionBar(MessageUtil.build(actionBarType.getBreakText(), replacements));
+                    player.spigot().sendMessage
+                            (ChatMessageType.ACTION_BAR, new TextComponent(MessageUtil.build(actionBarType.getBreakText(), replacements)));
                 }
             }
 
