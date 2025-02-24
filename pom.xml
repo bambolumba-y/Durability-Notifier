@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.bambolumba</groupId>
-  <artifactId>DurabilityNotifier</artifactId>
-  <version>1.2.0-spigot</version>
+  <artifactId>DurabilityNotifierSpigot</artifactId>
+  <version>1.2.0</version>
   <packaging>jar</packaging>
 
   <name>Durability Notifier</name>
