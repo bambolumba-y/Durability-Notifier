@@ -13,6 +13,7 @@ import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.Notifications.SoundType;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DurabilityUtil {
 
@@ -47,17 +48,13 @@ public class DurabilityUtil {
 
         if (isDurabilityLow(durability)) {
 
-            String itemName;
-            if (itemStack.getItemMeta().hasDisplayName()) {
-                itemName = MessageUtil.removeBrackets(itemStack.getItemMeta().getDisplayName());
-            } else {
-                itemName = itemStack.getType().name().replace("_", " ").toLowerCase();
-            }
+            String itemName = getName(itemStack);
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
                     Pair.of("\\{durability\\}", String.valueOf(durability))
             );
+
 
             if (messageType.isEnabled()) {
                 if (!messageType.getDamageText().isEmpty()) {
@@ -92,12 +89,7 @@ public class DurabilityUtil {
 
         if (isDurabilityLow(durability)) {
 
-            String itemName;
-            if (itemStack.getItemMeta().hasDisplayName()) {
-                itemName = MessageUtil.removeBrackets(itemStack.getItemMeta().getDisplayName());
-            } else {
-                itemName = itemStack.getType().name().replace("_", " ").toLowerCase();
-            }
+            String itemName = getName(itemStack);
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
@@ -123,6 +115,17 @@ public class DurabilityUtil {
                 }
             }
 
+        }
+
+    }
+
+    public String getName(ItemStack itemStack) {
+
+        if (!itemStack.getItemMeta().hasDisplayName()) {
+            String name = ConfigManager.getConfig().getString("item-names." + itemStack.getType().name().toLowerCase());
+            return Objects.requireNonNullElseGet(name, () -> itemStack.getType().name().replace("_", " ").toLowerCase());
+        } else {
+            return itemStack.getItemMeta().getDisplayName();
         }
 
     }
