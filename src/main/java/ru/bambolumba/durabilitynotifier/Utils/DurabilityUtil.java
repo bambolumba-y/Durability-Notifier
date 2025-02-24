@@ -12,6 +12,7 @@ import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.Notifications.SoundType;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DurabilityUtil {
 
@@ -44,7 +45,7 @@ public class DurabilityUtil {
 
         if (isDurabilityLow(durability)) {
 
-            String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
+            String itemName = getName(itemStack);
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
@@ -83,7 +84,7 @@ public class DurabilityUtil {
 
         if (isDurabilityLow(durability)) {
 
-            String itemName = MessageUtil.removeBrackets(PlainTextComponentSerializer.plainText().serialize(itemStack.displayName()));
+            String itemName = getName(itemStack);
 
             List<Pair<String, String>> replacements = List.of(
                     Pair.of("\\{item\\}", itemName),
@@ -108,6 +109,17 @@ public class DurabilityUtil {
                 }
             }
 
+        }
+
+    }
+
+    public String getName(ItemStack itemStack) {
+
+        if (!itemStack.getItemMeta().hasDisplayName()) {
+            String name = ConfigManager.getConfig().getString("item-names." + itemStack.getType().name().toLowerCase());
+            return Objects.requireNonNullElseGet(name, () -> itemStack.getType().name().replace("_", " ").toLowerCase());
+        } else {
+            return itemStack.getItemMeta().getDisplayName();
         }
 
     }
