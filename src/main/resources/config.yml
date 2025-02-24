@@ -21,3 +21,7 @@ notifications:
       enabled: true
       damage-sound: "ITEM_CROSSBOW_HIT"
       break-sound: "ENTITY_VEX_DEATH"
+
+#You can set alternative names for items with default name (that have not been renamed). This is useful if you need a language other than English.
+item-names:
+  diamond_axe: "Алмазный топор"
