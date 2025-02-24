@@ -13,6 +13,7 @@ import ru.bambolumba.durabilitynotifier.Notifications.MessageType;
 import ru.bambolumba.durabilitynotifier.DurabilityNotifier;
 import ru.bambolumba.durabilitynotifier.Notifications.SoundType;
 import ru.bambolumba.durabilitynotifier.Utils.ConfigManager;
+import ru.bambolumba.durabilitynotifier.Utils.DurabilityUtil;
 import ru.bambolumba.durabilitynotifier.Utils.MessageUtil;
 
 import java.util.List;
@@ -38,14 +39,10 @@ public class Admin {
             return true;
         }
 
+        DurabilityUtil durabilityUtil = plugin.getDurabilityUtil();
+
         ItemStack itemStack = player.getInventory().getItemInMainHand();
-        String itemName;
-        if (itemStack.getItemMeta().hasDisplayName()) {
-            itemName = MessageUtil.removeBrackets(itemStack.getItemMeta().getDisplayName());
-        } else {
-            itemName = itemStack.getType().name().replace("_", " ").toLowerCase();
-        }
-        System.out.println(itemName);
+        String itemName = durabilityUtil.getName(itemStack);
 
         /*
             ./durability admin preview
@@ -58,25 +55,16 @@ public class Admin {
                 return true;
             }
 
-            ActionBarType actionBarType = plugin.getActionBar();
-            MessageType messageType = plugin.getMessage();
-            SoundType soundType = plugin.getSound();
+            Damageable damageable = (Damageable) itemStack.getItemMeta();
 
-            List<Pair<String, String>> replacements = List.of(
-                    Pair.of("\\{item\\}", itemName),
-                    Pair.of("\\{durability\\}", String.valueOf(0)
-            ));
+            if (!damageable.hasDamage()) {
+                player.sendMessage(MessageUtil.build("error.admin.not-damageable-item"));
+            }
 
             if (args[2].equalsIgnoreCase("damage")) {
-                player.sendMessage(MessageUtil.build(messageType.getDamageText(), replacements));
-                player.spigot().sendMessage
-                        (ChatMessageType.ACTION_BAR, new TextComponent(MessageUtil.build(actionBarType.getDamageText(), replacements)));
-                player.playSound(player.getLocation(), soundType.getDamageSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+                durabilityUtil.sendDamageNotification(player, itemStack, durabilityUtil.getDurability(itemStack, damageable));
             } else if (args[2].equalsIgnoreCase("break")) {
-                player.sendMessage(MessageUtil.build(messageType.getBreakText(), replacements));
-                player.spigot().sendMessage
-                        (ChatMessageType.ACTION_BAR, new TextComponent(MessageUtil.build(actionBarType.getBreakText(), replacements)));
-                player.playSound(player.getLocation(), soundType.getBreakSound(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+                durabilityUtil.sendBreakNotification(player, itemStack, durabilityUtil.getDurability(itemStack, damageable));
             }
 
             return true;
